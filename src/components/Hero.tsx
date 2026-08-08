@@ -8,13 +8,13 @@ export default function Hero({ onStart }: HeroProps) {
   return (
     <section className="relative flex min-h-screen items-center overflow-hidden bg-[#075932] px-4 pt-16 sm:px-6">
       {/* Decorative Background Elements */}
-      <div className="pointer-events-none absolute inset-0 overflow-hidden flex flex-col justify-center items-center">
+      <div className="pointer-events-none absolute inset-0 overflow-hidden z-0">
         {/* Large Yellow Sun */}
-        <div className="w-[90vw] h-[90vw] max-w-[800px] max-h-[800px] rounded-full bg-[#FFE600] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-[45%]" />
+        <div className="w-[90vw] h-[90vw] max-w-[800px] max-h-[800px] rounded-full bg-[#FFE600] absolute top-[40%] left-1/2 -translate-x-1/2 -translate-y-1/2" />
         
         {/* Simple wavy lines for ocean at the bottom */}
-        <div className="absolute bottom-0 left-0 w-full h-[25vh] bg-[#075932]" />
-        <svg className="absolute bottom-[25vh] left-0 w-full h-12" preserveAspectRatio="none" viewBox="0 0 1440 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <div className="absolute bottom-0 left-0 w-full h-32 sm:h-48 bg-[#075932] z-0" />
+        <svg className="absolute bottom-32 sm:bottom-48 left-0 w-full h-12 z-0" preserveAspectRatio="none" viewBox="0 0 1440 48" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M0 24C240 24 240 48 480 48C720 48 720 0 960 0C1200 0 1200 24 1440 24V48H0V24Z" fill="#FDFBF7" />
         </svg>
       </div>

@@ -201,19 +201,21 @@ export default function Generator({ onBack }: GeneratorProps) {
               </div>
 
               {/* Card Container */}
-              <div className="relative mx-auto max-w-[400px]">
+              <div className="relative mx-auto max-w-[400px] aspect-square" style={{ containerType: 'inline-size' }}>
                 {/* Card */}
-                <div className="relative overflow-hidden shadow-[12px_12px_0px_0px_rgba(5,59,33,1)] border-4 border-[#053b21] bg-[#0d7842]">
-                  <BuilderCard
-                    ref={cardRef}
-                    name={name}
-                    stack={stack}
-                    builderTitle={builderTitle}
-                    imageUrl={imageUrl}
-                    builderId={builderId}
-                    imagePosition={imagePosition}
-                    imageZoom={imageZoom}
-                  />
+                <div className="relative overflow-hidden shadow-[12px_12px_0px_0px_rgba(5,59,33,1)] border-4 border-[#053b21] bg-[#0d7842] w-full h-full">
+                  <div style={{ width: '1080px', height: '1080px', transform: 'scale(calc(100cqw / 1080))', transformOrigin: 'top left' }}>
+                    <BuilderCard
+                      ref={cardRef}
+                      name={name}
+                      stack={stack}
+                      builderTitle={builderTitle}
+                      imageUrl={imageUrl}
+                      builderId={builderId}
+                      imagePosition={imagePosition}
+                      imageZoom={imageZoom}
+                    />
+                  </div>
                 </div>
               </div>
 

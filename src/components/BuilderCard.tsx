@@ -22,8 +22,8 @@ const BuilderCard = forwardRef<HTMLDivElement, BuilderCardProps>(
     return (
       <div
         ref={ref}
-        className="builder-card relative aspect-square w-full overflow-hidden bg-[#075932]"
-        style={{ containerType: 'inline-size' }}
+        className="builder-card relative overflow-hidden bg-[#075932] shrink-0"
+        style={{ width: '1080px', height: '1080px' }}
       >
         {/* Background Elements */}
         {/* Big Yellow Sun */}
@@ -36,7 +36,10 @@ const BuilderCard = forwardRef<HTMLDivElement, BuilderCardProps>(
         </svg>
 
         {/* Photo Container */}
-        <div className="absolute top-[22%] left-1/2 -translate-x-1/2 w-[55%] h-[55%] border-[0.8cqw] border-[#FDFBF7] shadow-2xl bg-[#053b21] overflow-hidden transform -rotate-2">
+        <div 
+          className="absolute top-[22%] left-1/2 -translate-x-1/2 w-[55%] h-[55%] border-[#FDFBF7] shadow-2xl bg-[#053b21] overflow-hidden transform -rotate-2"
+          style={{ borderWidth: '9px' }}
+        >
            {imageUrl ? (
               <img
                 src={imageUrl}
@@ -49,7 +52,7 @@ const BuilderCard = forwardRef<HTMLDivElement, BuilderCardProps>(
               />
             ) : (
               <div className="w-full h-full flex flex-col items-center justify-center opacity-40">
-                <span style={{ fontSize: '12cqw' }}>🌴</span>
+                <span style={{ fontSize: '130px' }}>🌴</span>
               </div>
             )}
             
@@ -60,7 +63,7 @@ const BuilderCard = forwardRef<HTMLDivElement, BuilderCardProps>(
         {/* Typography - Main Campaign Headers */}
         <div 
           className="absolute top-[6%] left-[6%] font-serif font-black leading-[0.85] text-[#FDFBF7] tracking-tighter uppercase drop-shadow-xl z-10"
-          style={{ fontSize: '11cqw' }}
+          style={{ fontSize: '119px' }}
         >
            HACKER
            <br />
@@ -70,36 +73,46 @@ const BuilderCard = forwardRef<HTMLDivElement, BuilderCardProps>(
         {/* Pink Goa Script */}
         <div 
           className="absolute top-[18%] left-[8%] font-serif text-[#FF0080] transform -rotate-12 z-20" 
-          style={{ fontSize: '10cqw', textShadow: '0.4cqw 0.4cqw 0px #FDFBF7, -0.4cqw -0.4cqw 0px #FDFBF7, 0.4cqw -0.4cqw 0px #FDFBF7, -0.4cqw 0.4cqw 0px #FDFBF7' }}
+          style={{ fontSize: '108px', textShadow: '4px 4px 0px #FDFBF7, -4px -4px 0px #FDFBF7, 4px -4px 0px #FDFBF7, -4px 4px 0px #FDFBF7' }}
         >
            गोवा
         </div>
 
         {/* Builder Info Overlay - Notice Board Style Stickers */}
         <div 
-          className="absolute bottom-[28%] right-[8%] bg-[#FFE600] px-[2cqw] py-[1cqw] border-[0.4cqw] border-[#075932] transform rotate-3 z-30 flex flex-col items-end"
-          style={{ boxShadow: '0.8cqw 0.8cqw 0px 0px rgba(7,89,50,1)' }}
+          className="absolute bottom-[28%] right-[8%] bg-[#FFE600] border-[#075932] transform rotate-3 z-30 flex flex-col items-end"
+          style={{ 
+            padding: '11px 22px',
+            borderWidth: '4px',
+            boxShadow: '9px 9px 0px 0px rgba(7,89,50,1)' 
+          }}
         >
            <div 
              className="font-serif font-bold text-[#075932] leading-none text-right capitalize whitespace-nowrap"
-             style={{ fontSize: '5.5cqw' }}
+             style={{ fontSize: '59px' }}
            >
              {displayName}
            </div>
            <div 
-             className="font-mono font-bold text-[#FF0080] uppercase tracking-widest mt-[0.5cqw] border-t-[0.2cqw] border-[#075932]/20 pt-[0.5cqw] w-full text-right"
-             style={{ fontSize: '2.2cqw' }}
+             className="font-mono font-bold text-[#FF0080] uppercase tracking-widest w-full text-right border-[#075932]/20"
+             style={{ 
+               fontSize: '24px',
+               marginTop: '5px',
+               borderTopWidth: '2px',
+               paddingTop: '5px'
+             }}
            >
              {displayStack}
            </div>
         </div>
 
         <div 
-          className="absolute bottom-[35%] left-[6%] bg-[#FF0080] px-[2cqw] py-[0.5cqw] border-[0.4cqw] border-[#FDFBF7] shadow-xl transform -rotate-6 z-30"
+          className="absolute bottom-[35%] left-[6%] bg-[#FF0080] border-[#FDFBF7] shadow-xl transform -rotate-6 z-30"
+          style={{ padding: '5px 22px', borderWidth: '4px' }}
         >
            <div 
              className="font-sans font-black text-[#FDFBF7] uppercase tracking-widest whitespace-nowrap"
-             style={{ fontSize: '2.5cqw' }}
+             style={{ fontSize: '27px' }}
            >
              {displayTitle}
            </div>
@@ -107,31 +120,31 @@ const BuilderCard = forwardRef<HTMLDivElement, BuilderCardProps>(
 
         {/* Bottom Campaign Footer */}
         <div className="absolute bottom-[5%] left-0 w-full flex justify-between items-end px-[8%] z-10">
-           <div className="flex flex-col gap-[0.5cqw]">
+           <div className="flex flex-col" style={{ gap: '5px' }}>
               <div 
-                className="font-sans font-black text-[#FFE600] uppercase tracking-widest bg-[#053b21] px-[1cqw] py-[0.2cqw] self-start transform rotate-1"
-                style={{ fontSize: '3cqw' }}
+                className="font-sans font-black text-[#FFE600] uppercase tracking-widest bg-[#053b21] self-start transform rotate-1"
+                style={{ fontSize: '32px', padding: '2px 11px' }}
               >
                 HH GOA '26
               </div>
               <div 
-                className="font-mono font-bold text-[#FDFBF7] uppercase tracking-widest mt-[0.5cqw]"
-                style={{ fontSize: '2.2cqw' }}
+                className="font-mono font-bold text-[#FDFBF7] uppercase tracking-widest"
+                style={{ fontSize: '24px', marginTop: '5px' }}
               >
                 28–31 OCT 2026 • GOA, INDIA
               </div>
            </div>
            
-           <div className="flex flex-col items-end gap-[0.5cqw] text-right">
+           <div className="flex flex-col items-end text-right" style={{ gap: '5px' }}>
               <div 
-                className="font-mono font-bold text-[#FF0080] bg-[#FDFBF7] px-[1cqw] py-[0.2cqw] shadow-lg transform -rotate-2"
-                style={{ fontSize: '1.8cqw' }}
+                className="font-mono font-bold text-[#FF0080] bg-[#FDFBF7] shadow-lg transform -rotate-2"
+                style={{ fontSize: '19px', padding: '2px 11px' }}
               >
                 #FrameInGoa
               </div>
               <div 
-                className="font-mono font-bold text-[#FDFBF7]/80 mt-[0.5cqw] tracking-widest"
-                style={{ fontSize: '1.8cqw' }}
+                className="font-mono font-bold text-[#FDFBF7]/80 tracking-widest"
+                style={{ fontSize: '19px', marginTop: '5px' }}
               >
                 ID: {builderId} • 2:47 PM STUDIO
               </div>
@@ -140,7 +153,7 @@ const BuilderCard = forwardRef<HTMLDivElement, BuilderCardProps>(
 
         {/* Small Decorative Palm/Sun Graphics at bottom */}
         <div className="absolute bottom-[10%] left-[45%] opacity-80 z-0">
-           <svg style={{ width: '8cqw', height: '8cqw' }} viewBox="0 0 24 24" fill="none" stroke="#FFE600" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+           <svg style={{ width: '86px', height: '86px' }} viewBox="0 0 24 24" fill="none" stroke="#FFE600" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
              <circle cx="12" cy="12" r="5"></circle>
              <line x1="12" y1="1" x2="12" y2="3"></line>
              <line x1="12" y1="21" x2="12" y2="23"></line>
