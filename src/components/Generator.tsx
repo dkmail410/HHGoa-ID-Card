@@ -1,4 +1,4 @@
-import { useState, useRef, useMemo, useCallback } from 'react';
+import { useState, useRef, useMemo, useCallback, useLayoutEffect } from 'react';
 import { ArrowLeft, ZoomIn, ZoomOut, RotateCcw } from 'lucide-react';
 import PhotoUploader from './PhotoUploader';
 import BuilderForm from './BuilderForm';
@@ -17,8 +17,22 @@ export default function Generator({ onBack }: GeneratorProps) {
   const [imageUrl, setImageUrl] = useState<string | null>(null);
   const [imagePosition, setImagePosition] = useState({ x: 0, y: 0 });
   const [imageZoom, setImageZoom] = useState(1);
+  const [cardScale, setCardScale] = useState(1);
 
   const cardRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useLayoutEffect(() => {
+    if (!containerRef.current) return;
+    const observer = new ResizeObserver((entries) => {
+      for (const entry of entries) {
+        setCardScale(entry.contentRect.width / 1080);
+      }
+    });
+    observer.observe(containerRef.current);
+    return () => observer.disconnect();
+  }, []);
+
   const builderId = useMemo(() => generateBuilderId(), []);
 
   const isReady = !!(name.trim() && stack && builderTitle && imageUrl);
@@ -201,10 +215,13 @@ export default function Generator({ onBack }: GeneratorProps) {
               </div>
 
               {/* Card Container */}
-              <div className="relative mx-auto max-w-[400px] aspect-square" style={{ containerType: 'inline-size' }}>
+              <div className="relative mx-auto max-w-[400px] aspect-square">
                 {/* Card */}
-                <div className="relative overflow-hidden shadow-[12px_12px_0px_0px_rgba(5,59,33,1)] border-4 border-[#053b21] bg-[#0d7842] w-full h-full">
-                  <div style={{ width: '1080px', height: '1080px', transform: 'scale(calc(100cqw / 1080))', transformOrigin: 'top left' }}>
+                <div 
+                  ref={containerRef}
+                  className="relative overflow-hidden shadow-[12px_12px_0px_0px_rgba(5,59,33,1)] border-4 border-[#053b21] bg-[#0d7842] w-full h-full"
+                >
+                  <div style={{ width: '1080px', height: '1080px', transform: `scale(${cardScale})`, transformOrigin: 'top left' }}>
                     <BuilderCard
                       ref={cardRef}
                       name={name}
