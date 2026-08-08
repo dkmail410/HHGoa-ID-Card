@@ -1,17 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap');
 @import "tailwindcss";
 
 @theme {
-  --color-orange-400: #fb923c;
-  --color-orange-500: #f97316;
-  --color-amber-400: #fbbf24;
-  --color-amber-500: #f59e0b;
-  --color-yellow-300: #fde047;
-  --color-cyan-500: #06b6d4;
-  --color-green-400: #4ade80;
-  --color-green-500: #22c55e;
-  --color-red-400: #f87171;
-  --color-red-500: #ef4444;
+  --color-hh-green: #075932;
+  --color-hh-yellow: #FFE600;
+  --color-hh-pink: #FF0080;
+  --color-hh-cream: #FDFBF7;
+  --color-hh-dark: #053b21;
 }
 
 /* Base styles */
@@ -20,15 +15,15 @@
 }
 
 html {
-  font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 body {
   margin: 0;
-  background: #0a0a0f;
-  color: white;
+  background: #075932;
+  color: #FDFBF7;
   overflow-x: hidden;
 }
 
@@ -89,7 +84,16 @@ body {
 
 /* Builder card export styles - ensure fonts render */
 .builder-card {
-  font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
+}
+.font-serif {
+  font-family: 'Playfair Display', serif;
+}
+.font-mono {
+  font-family: 'Space Mono', monospace;
+}
+.font-sans {
+  font-family: 'DM Sans', sans-serif;
 }
 
 /* Prevent mobile tap highlighting */
@@ -100,7 +104,7 @@ a {
 
 /* Focus styles for accessibility */
 :focus-visible {
-  outline: 2px solid #f97316;
+  outline: 2px solid #FF0080;
   outline-offset: 2px;
   border-radius: 4px;
 }

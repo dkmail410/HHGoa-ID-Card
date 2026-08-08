@@ -74,19 +74,19 @@ export default function PhotoUploader({
 
   if (imageUrl) {
     return (
-      <div className="space-y-2">
-        <label className="block text-xs font-medium tracking-wider text-white/40">
+      <div className="space-y-2 bg-[#FDFBF7] p-4 border-2 border-[#075932] shadow-[4px_4px_0px_0px_rgba(7,89,50,1)] transform rotate-1">
+        <label className="block font-mono text-xs font-bold tracking-widest text-[#075932] uppercase">
           YOUR PHOTO
         </label>
-        <div className="relative overflow-hidden rounded-xl border border-white/10 bg-white/[0.03]">
+        <div className="relative overflow-hidden border-2 border-[#075932] bg-white p-2 shadow-inner">
           <img
             src={imageUrl}
             alt="Uploaded photo"
-            className="h-48 w-full object-cover"
+            className="h-48 w-full object-cover border border-[#075932]/20"
           />
           <button
             onClick={handleRemove}
-            className="absolute right-2 top-2 flex h-8 w-8 items-center justify-center rounded-full bg-black/60 text-white/70 backdrop-blur-sm transition-colors hover:bg-red-500/80 hover:text-white"
+            className="absolute right-4 top-4 flex h-8 w-8 items-center justify-center border-2 border-[#075932] bg-[#FF0080] text-white transition-colors hover:bg-red-600 shadow-[2px_2px_0px_0px_rgba(7,89,50,1)]"
             aria-label="Remove photo"
           >
             <X className="h-4 w-4" />
@@ -97,8 +97,8 @@ export default function PhotoUploader({
   }
 
   return (
-    <div className="space-y-2">
-      <label className="block text-xs font-medium tracking-wider text-white/40">
+    <div className="space-y-2 bg-[#FDFBF7] p-4 border-2 border-[#075932] shadow-[4px_4px_0px_0px_rgba(7,89,50,1)] transform rotate-1">
+      <label className="block font-mono text-xs font-bold tracking-widest text-[#075932] uppercase">
         YOUR PHOTO
       </label>
       <div
@@ -112,28 +112,28 @@ export default function PhotoUploader({
           if (e.key === 'Enter' || e.key === ' ') inputRef.current?.click();
         }}
         aria-label="Upload photo"
-        className={`flex cursor-pointer flex-col items-center justify-center gap-3 rounded-xl border-2 border-dashed px-4 py-10 transition-all duration-300 ${
+        className={`flex cursor-pointer flex-col items-center justify-center gap-3 border-2 border-dashed px-4 py-10 transition-all duration-300 ${
           isDragging
-            ? 'border-orange-500 bg-orange-500/10'
-            : 'border-white/10 bg-white/[0.02] hover:border-white/20 hover:bg-white/[0.04]'
+            ? 'border-[#FF0080] bg-[#FF0080]/10'
+            : 'border-[#075932]/40 bg-white hover:border-[#075932] hover:bg-[#FFE600]/20'
         }`}
       >
         <div
-          className={`flex h-12 w-12 items-center justify-center rounded-full transition-colors ${
-            isDragging ? 'bg-orange-500/20' : 'bg-white/5'
+          className={`flex h-12 w-12 items-center justify-center transition-colors border-2 border-[#075932] shadow-[2px_2px_0px_0px_rgba(7,89,50,1)] ${
+            isDragging ? 'bg-[#FFE600]' : 'bg-[#FDFBF7]'
           }`}
         >
           {isDragging ? (
-            <Upload className="h-5 w-5 text-orange-400" />
+            <Upload className="h-5 w-5 text-[#075932]" />
           ) : (
-            <ImageIcon className="h-5 w-5 text-white/30" />
+            <ImageIcon className="h-5 w-5 text-[#075932]" />
           )}
         </div>
         <div className="text-center">
-          <p className="text-sm font-medium text-white/60">
-            {isDragging ? 'Drop it here' : 'Drop your photo here'}
+          <p className="font-mono text-sm font-bold text-[#075932]">
+            {isDragging ? 'DROP IT HERE' : 'DROP YOUR PHOTO HERE'}
           </p>
-          <p className="mt-1 text-xs text-white/30">or choose a file</p>
+          <p className="mt-1 font-mono text-xs text-[#075932]/60">OR CHOOSE A FILE</p>
         </div>
         <input
           ref={inputRef}

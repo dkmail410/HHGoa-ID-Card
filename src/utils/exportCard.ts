@@ -4,19 +4,14 @@ export async function exportCardAsPng(
   element: HTMLElement,
   name: string
 ): Promise<void> {
-  const scale = 3;
-  const width = element.offsetWidth;
-  const height = element.offsetHeight;
-
   try {
     const dataUrl = await toPng(element, {
-      width: width * scale,
-      height: height * scale,
+      width: 1080,
+      height: 1080,
       style: {
-        transform: `scale(${scale})`,
-        transformOrigin: 'top left',
-        width: `${width}px`,
-        height: `${height}px`,
+        transform: 'none',
+        width: '1080px',
+        height: '1080px',
       },
       quality: 1.0,
       pixelRatio: 1,

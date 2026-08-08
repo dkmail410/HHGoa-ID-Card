@@ -50,18 +50,12 @@ export default function Generator({ onBack }: GeneratorProps) {
     setImagePosition((p) => ({ ...p, x: Math.min(p.x + 5, 50) }));
 
   return (
-    <section className="relative min-h-screen px-4 pt-24 pb-16 sm:px-6 bg-[#0a0a0f]">
-      {/* Background Elements */}
-      <div className="pointer-events-none absolute inset-0">
-        <div className="absolute -top-40 right-0 h-[500px] w-[500px] rounded-full bg-orange-500/20 blur-[120px]" />
-        <div className="absolute -bottom-40 left-0 h-[500px] w-[500px] rounded-full bg-cyan-500/20 blur-[120px]" />
-      </div>
-
+    <section className="relative min-h-screen px-4 pt-24 pb-16 sm:px-6 bg-[#075932]">
       <div className="relative z-10 mx-auto max-w-6xl">
         {/* Back button */}
         <button
           onClick={onBack}
-          className="mb-8 flex items-center gap-2 text-sm text-white/60 transition-colors hover:text-white"
+          className="mb-8 flex items-center gap-2 font-mono text-sm font-bold uppercase tracking-widest text-[#FDFBF7] transition-colors hover:text-[#FFE600]"
         >
           <ArrowLeft className="h-4 w-4" />
           Back
@@ -71,13 +65,13 @@ export default function Generator({ onBack }: GeneratorProps) {
           {/* LEFT: Form */}
           <div className="animate-fade-in space-y-6">
             <div>
-              <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
+              <h2 className="font-serif text-4xl font-black text-[#FDFBF7] sm:text-5xl uppercase tracking-tighter">
                 Create your{' '}
-                <span className="bg-gradient-to-r from-orange-400 to-amber-400 bg-clip-text text-transparent">
-                  Builder ID
+                <span className="text-[#FF0080]">
+                  Poster
                 </span>
               </h2>
-              <p className="mt-2 text-sm text-white/60">
+              <p className="mt-2 font-mono text-sm text-[#FDFBF7]/80">
                 Fill in the details below to generate your custom pass.
               </p>
             </div>
@@ -86,16 +80,16 @@ export default function Generator({ onBack }: GeneratorProps) {
 
             {/* Image adjustment controls */}
             {imageUrl && (
-              <div className="animate-fade-in space-y-2">
-                <label className="block text-xs font-medium tracking-wider text-white/40">
+              <div className="animate-fade-in space-y-2 bg-[#FDFBF7] p-4 border-2 border-[#075932] shadow-[4px_4px_0px_0px_rgba(7,89,50,1)] transform -rotate-1">
+                <label className="block font-mono text-xs font-bold tracking-widest text-[#075932] mb-2">
                   ADJUST PHOTO
                 </label>
                 <div className="flex flex-wrap items-center gap-2">
                   {/* Position controls */}
-                  <div className="flex items-center gap-1 rounded-lg border border-white/8 bg-white/[0.02] p-1">
+                  <div className="flex items-center gap-1 border-2 border-[#075932] bg-[#FDFBF7] p-1">
                     <button
                       onClick={handlePositionLeft}
-                      className="flex h-7 w-7 items-center justify-center rounded text-white/40 transition-colors hover:bg-white/10 hover:text-white/70"
+                      className="flex h-7 w-7 items-center justify-center font-bold text-[#075932] transition-colors hover:bg-[#FFE600]"
                       aria-label="Move photo left"
                       title="Move left"
                     >
@@ -103,7 +97,7 @@ export default function Generator({ onBack }: GeneratorProps) {
                     </button>
                     <button
                       onClick={handlePositionUp}
-                      className="flex h-7 w-7 items-center justify-center rounded text-white/40 transition-colors hover:bg-white/10 hover:text-white/70"
+                      className="flex h-7 w-7 items-center justify-center font-bold text-[#075932] transition-colors hover:bg-[#FFE600]"
                       aria-label="Move photo up"
                       title="Move up"
                     >
@@ -111,7 +105,7 @@ export default function Generator({ onBack }: GeneratorProps) {
                     </button>
                     <button
                       onClick={handlePositionDown}
-                      className="flex h-7 w-7 items-center justify-center rounded text-white/40 transition-colors hover:bg-white/10 hover:text-white/70"
+                      className="flex h-7 w-7 items-center justify-center font-bold text-[#075932] transition-colors hover:bg-[#FFE600]"
                       aria-label="Move photo down"
                       title="Move down"
                     >
@@ -119,7 +113,7 @@ export default function Generator({ onBack }: GeneratorProps) {
                     </button>
                     <button
                       onClick={handlePositionRight}
-                      className="flex h-7 w-7 items-center justify-center rounded text-white/40 transition-colors hover:bg-white/10 hover:text-white/70"
+                      className="flex h-7 w-7 items-center justify-center font-bold text-[#075932] transition-colors hover:bg-[#FFE600]"
                       aria-label="Move photo right"
                       title="Move right"
                     >
@@ -128,23 +122,23 @@ export default function Generator({ onBack }: GeneratorProps) {
                   </div>
 
                   {/* Zoom controls */}
-                  <div className="flex items-center gap-1 rounded-lg border border-white/8 bg-white/[0.02] p-1">
+                  <div className="flex items-center gap-1 border-2 border-[#075932] bg-[#FDFBF7] p-1">
                     <button
                       onClick={handleZoomOut}
                       disabled={imageZoom <= 1}
-                      className="flex h-7 w-7 items-center justify-center rounded text-white/40 transition-colors hover:bg-white/10 hover:text-white/70 disabled:opacity-30"
+                      className="flex h-7 w-7 items-center justify-center text-[#075932] transition-colors hover:bg-[#FFE600] disabled:opacity-30"
                       aria-label="Zoom out"
                       title="Zoom out"
                     >
                       <ZoomOut className="h-3.5 w-3.5" />
                     </button>
-                    <span className="min-w-[3rem] text-center text-xs text-white/30">
+                    <span className="min-w-[3rem] text-center font-mono text-xs font-bold text-[#075932]">
                       {Math.round(imageZoom * 100)}%
                     </span>
                     <button
                       onClick={handleZoomIn}
                       disabled={imageZoom >= 2}
-                      className="flex h-7 w-7 items-center justify-center rounded text-white/40 transition-colors hover:bg-white/10 hover:text-white/70 disabled:opacity-30"
+                      className="flex h-7 w-7 items-center justify-center text-[#075932] transition-colors hover:bg-[#FFE600] disabled:opacity-30"
                       aria-label="Zoom in"
                       title="Zoom in"
                     >
@@ -155,12 +149,12 @@ export default function Generator({ onBack }: GeneratorProps) {
                   {/* Reset */}
                   <button
                     onClick={handleResetPosition}
-                    className="flex h-9 items-center gap-1.5 rounded-lg border border-white/8 bg-white/[0.02] px-2.5 text-xs text-white/30 transition-colors hover:bg-white/[0.05] hover:text-white/50"
+                    className="flex h-9 items-center gap-1.5 border-2 border-[#075932] bg-[#FDFBF7] px-2.5 font-mono text-xs font-bold text-[#075932] transition-colors hover:bg-[#FFE600]"
                     aria-label="Reset photo position"
                     title="Reset position"
                   >
                     <RotateCcw className="h-3 w-3" />
-                    Reset
+                    RESET
                   </button>
                 </div>
               </div>
@@ -177,8 +171,8 @@ export default function Generator({ onBack }: GeneratorProps) {
 
             {/* Validation hints */}
             {!isReady && (name || stack || imageUrl) && (
-              <div className="rounded-xl border border-white/5 bg-white/[0.02] px-4 py-3">
-                <p className="text-xs text-white/30">
+              <div className="bg-[#FFE600] px-4 py-3 border-2 border-[#075932] shadow-[4px_4px_0px_0px_rgba(7,89,50,1)] transform rotate-1">
+                <p className="font-mono text-xs font-bold text-[#075932] uppercase">
                   {!imageUrl && '📸 Upload a photo • '}
                   {!name.trim() && '✍️ Enter your name • '}
                   {!stack && '🛠 Pick your stack'}
@@ -201,18 +195,15 @@ export default function Generator({ onBack }: GeneratorProps) {
           <div className="animate-fade-in animation-delay-200">
             <div className="lg:sticky lg:top-24">
               <div className="mb-4">
-                <h3 className="text-xs font-medium tracking-wider text-white/30">
+                <h3 className="font-mono text-xs font-bold tracking-widest text-[#FDFBF7]/60">
                   LIVE PREVIEW
                 </h3>
               </div>
 
               {/* Card Container */}
               <div className="relative mx-auto max-w-[400px]">
-                {/* Glow */}
-                <div className="absolute -inset-3 rounded-2xl bg-gradient-to-br from-orange-500/15 via-amber-500/5 to-cyan-500/5 blur-xl" />
-
                 {/* Card */}
-                <div className="relative overflow-hidden rounded-2xl border border-white/10 shadow-2xl">
+                <div className="relative overflow-hidden shadow-[12px_12px_0px_0px_rgba(5,59,33,1)] border-4 border-[#053b21] bg-[#0d7842]">
                   <BuilderCard
                     ref={cardRef}
                     name={name}

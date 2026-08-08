@@ -6,54 +6,53 @@ interface HeroProps {
 
 export default function Hero({ onStart }: HeroProps) {
   return (
-    <section className="relative flex min-h-screen items-center overflow-hidden px-4 pt-16 sm:px-6">
-      {/* Background */}
-      <div className="pointer-events-none absolute inset-0">
-        <div className="absolute -top-40 right-0 h-[500px] w-[500px] rounded-full bg-orange-500/20 blur-[120px]" />
-        <div className="absolute -bottom-40 left-0 h-[500px] w-[500px] rounded-full bg-cyan-500/20 blur-[120px]" />
+    <section className="relative flex min-h-screen items-center overflow-hidden bg-[#075932] px-4 pt-16 sm:px-6">
+      {/* Decorative Background Elements */}
+      <div className="pointer-events-none absolute inset-0 overflow-hidden flex flex-col justify-center items-center">
+        {/* Large Yellow Sun */}
+        <div className="w-[90vw] h-[90vw] max-w-[800px] max-h-[800px] rounded-full bg-[#FFE600] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-[45%]" />
+        
+        {/* Simple wavy lines for ocean at the bottom */}
+        <div className="absolute bottom-0 left-0 w-full h-[25vh] bg-[#075932]" />
+        <svg className="absolute bottom-[25vh] left-0 w-full h-12" preserveAspectRatio="none" viewBox="0 0 1440 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 24C240 24 240 48 480 48C720 48 720 0 960 0C1200 0 1200 24 1440 24V48H0V24Z" fill="#FDFBF7" />
+        </svg>
       </div>
 
-      <div className="relative z-10 mx-auto grid max-w-7xl grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-20">
-        {/* Left: Content */}
-        <div className="animate-fade-in-up text-center lg:text-left">
+      <div className="relative z-10 mx-auto max-w-7xl w-full flex flex-col items-center text-center mt-[-5vh]">
+        {/* Content */}
+        <div className="animate-fade-in-up flex flex-col items-center">
           
-          <div className="mb-4 inline-block rounded-full bg-orange-500/10 px-3 py-1 font-mono text-xs font-medium text-orange-400 ring-1 ring-orange-500/20">
-            OFFICIAL ID GENERATOR
+          <div className="mb-6 inline-block font-mono text-sm font-bold tracking-widest text-[#075932] bg-[#FFE600] px-4 py-1.5 transform -rotate-2 border-2 border-[#075932] shadow-[4px_4px_0px_0px_rgba(7,89,50,1)]">
+            28–31 OCT 2026
           </div>
 
-          <h1 className="mb-6 text-5xl font-bold tracking-tight text-white sm:text-7xl lg:text-8xl">
-            Hacker
-            <br />
-            House <span className="bg-gradient-to-r from-orange-400 to-amber-400 bg-clip-text text-transparent">Goa</span>
-          </h1>
+          <div className="relative mb-6">
+             <h1 className="font-serif text-[4.5rem] font-black leading-[0.85] text-[#FDFBF7] sm:text-[7rem] lg:text-[10rem] tracking-tighter uppercase drop-shadow-xl">
+               HACKER
+               <br />
+               HOUSE
+             </h1>
+             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 font-serif text-[3.5rem] sm:text-[6rem] lg:text-[8rem] text-[#FF0080] transform rotate-[-8deg] whitespace-nowrap" style={{ textShadow: '3px 3px 0px #FDFBF7, -3px -3px 0px #FDFBF7, 3px -3px 0px #FDFBF7, -3px 3px 0px #FDFBF7' }}>
+               गोवा
+             </div>
+          </div>
           
-          <p className="mb-8 max-w-lg text-lg text-white/60 mx-auto lg:mx-0">
-            Create your official builder ID card for Hacker House Goa '26. Generate, download, and share it.
+          <h2 className="mt-4 mb-6 font-sans text-2xl sm:text-4xl font-bold uppercase text-[#075932] bg-[#FFE600] px-4 py-2 transform rotate-1 border-2 border-[#075932] shadow-[4px_4px_0px_0px_rgba(7,89,50,1)] tracking-widest">
+            Make Your #FrameInGoa
+          </h2>
+
+          <p className="mb-10 max-w-lg text-lg sm:text-xl text-[#FDFBF7] font-medium font-sans">
+            Drop your photo into the HH Goa '26 frame.
           </p>
 
           <button
             onClick={onStart}
-            className="group relative inline-flex items-center gap-4 rounded-full bg-white px-8 py-4 text-sm font-bold uppercase tracking-widest text-black transition-all hover:bg-white/90 active:scale-95 shadow-lg"
+            className="group relative inline-flex items-center gap-4 bg-[#FF0080] px-10 py-5 font-sans text-lg font-bold uppercase tracking-widest text-[#FDFBF7] transition-all hover:bg-[#d6006b] hover:-translate-y-1 border-2 border-[#075932] shadow-[8px_8px_0px_0px_rgba(7,89,50,1)] active:translate-y-1 active:shadow-[4px_4px_0px_0px_rgba(7,89,50,1)]"
           >
-            CREATE ID CARD
-            <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
+            MAKE MY FRAME
+            <ArrowRight className="h-6 w-6 transition-transform group-hover:translate-x-2" />
           </button>
-        </div>
-
-        {/* Right: Abstract Card Graphic */}
-        <div className="animate-fade-in-up flex justify-center animation-delay-200 lg:justify-end">
-           <div className="relative h-[400px] w-full max-w-[400px]">
-              <div className="absolute inset-0 rounded-2xl bg-gradient-to-tr from-orange-500/20 to-amber-500/20 backdrop-blur-sm border border-white/10 shadow-2xl transform rotate-3 transition-transform hover:rotate-0 duration-500">
-                  <div className="p-8 h-full flex flex-col">
-                      <div className="h-16 w-16 rounded-lg bg-white/10 mb-auto"></div>
-                      <div className="space-y-4">
-                          <div className="h-4 w-3/4 rounded bg-white/20"></div>
-                          <div className="h-4 w-1/2 rounded bg-white/10"></div>
-                      </div>
-                  </div>
-              </div>
-              <div className="absolute inset-0 -z-10 rounded-2xl bg-gradient-to-bl from-cyan-500/20 to-blue-500/20 transform -rotate-3 blur-sm"></div>
-           </div>
         </div>
       </div>
     </section>
