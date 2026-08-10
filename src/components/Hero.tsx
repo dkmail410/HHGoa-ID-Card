@@ -6,23 +6,22 @@ interface HeroProps {
 
 export default function Hero({ onStart }: HeroProps) {
   return (
-    <section className="relative flex min-h-screen items-center overflow-hidden bg-[#075932] px-4 pt-16 sm:px-6">
+    <section className="relative flex min-h-screen items-center overflow-hidden bg-[#075932] px-4 pt-14 sm:px-6">
       {/* Decorative Background Elements */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden z-0">
         {/* Large Yellow Sun */}
         <div className="w-[90vw] h-[90vw] max-w-[800px] max-h-[800px] rounded-full bg-[#FFE600] absolute top-[40%] left-1/2 -translate-x-1/2 -translate-y-1/2" />
-        
-        {/* Simple wavy lines for ocean at the bottom */}
-        <div className="absolute bottom-0 left-0 w-full h-32 sm:h-48 bg-[#075932] z-0" />
-        <svg className="absolute bottom-32 sm:bottom-48 left-0 w-full h-12 z-0" preserveAspectRatio="none" viewBox="0 0 1440 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M0 24C240 24 240 48 480 48C720 48 720 0 960 0C1200 0 1200 24 1440 24V48H0V24Z" fill="#FDFBF7" />
+
+        {/* Wave at the bottom */}
+        <svg className="absolute bottom-0 left-0 w-full h-24 z-0" preserveAspectRatio="none" viewBox="0 0 1440 96" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 48C240 48 240 96 480 96C720 96 720 0 960 0C1200 0 1200 48 1440 48V96H0V48Z" fill="#053b21" opacity="0.3" />
+            <path d="M0 72C240 72 240 96 480 96C720 96 720 36 960 36C1200 36 1200 72 1440 72V96H0V72Z" fill="#FDFBF7" opacity="0.06" />
         </svg>
       </div>
 
       <div className="relative z-10 mx-auto max-w-7xl w-full flex flex-col items-center text-center mt-[-5vh]">
-        {/* Content */}
         <div className="animate-fade-in-up flex flex-col items-center">
-          
+
           <div className="mb-6 inline-block font-mono text-sm font-bold tracking-widest text-[#075932] bg-[#FFE600] px-4 py-1.5 transform -rotate-2 border-2 border-[#075932] shadow-[4px_4px_0px_0px_rgba(7,89,50,1)]">
             28–31 OCT 2026
           </div>
@@ -37,8 +36,8 @@ export default function Hero({ onStart }: HeroProps) {
                गोवा
              </div>
           </div>
-          
-          <h2 className="mt-4 mb-6 font-sans text-2xl sm:text-4xl font-bold uppercase text-[#075932] bg-[#FFE600] px-4 py-2 transform rotate-1 border-2 border-[#075932] shadow-[4px_4px_0px_0px_rgba(7,89,50,1)] tracking-widest">
+
+          <h2 className="mt-4 mb-6 font-sans text-xl sm:text-3xl font-bold uppercase text-[#075932] bg-[#FFE600] px-4 py-2 transform rotate-1 border-2 border-[#075932] shadow-[4px_4px_0px_0px_rgba(7,89,50,1)] tracking-widest">
             Make Your #FrameInGoa
           </h2>
 

@@ -1,4 +1,4 @@
-import { useState, useRef, useMemo, useCallback, useLayoutEffect } from 'react';
+import { useState, useRef, useMemo, useLayoutEffect } from 'react';
 import { ArrowLeft, ZoomIn, ZoomOut, RotateCcw } from 'lucide-react';
 import PhotoUploader from './PhotoUploader';
 import BuilderForm from './BuilderForm';
@@ -15,6 +15,8 @@ export default function Generator({ onBack }: GeneratorProps) {
   const [stack, setStack] = useState('');
   const [builderTitle, setBuilderTitle] = useState('');
   const [imageUrl, setImageUrl] = useState<string | null>(null);
+  
+  // Image adjustment state
   const [imagePosition, setImagePosition] = useState({ x: 0, y: 0 });
   const [imageZoom, setImageZoom] = useState(1);
   const [cardScale, setCardScale] = useState(1);
@@ -37,14 +39,14 @@ export default function Generator({ onBack }: GeneratorProps) {
 
   const isReady = !!(name.trim() && stack && builderTitle && imageUrl);
 
-  const handleReset = useCallback(() => {
+  const handleReset = () => {
     setName('');
     setStack('');
     setBuilderTitle('');
     setImageUrl(null);
     setImagePosition({ x: 0, y: 0 });
     setImageZoom(1);
-  }, []);
+  };
 
   const handleZoomIn = () => setImageZoom((z) => Math.min(z + 0.1, 2));
   const handleZoomOut = () => setImageZoom((z) => Math.max(z - 0.1, 1));
@@ -52,32 +54,26 @@ export default function Generator({ onBack }: GeneratorProps) {
     setImagePosition({ x: 0, y: 0 });
     setImageZoom(1);
   };
-
-  // Image position adjustment handlers
-  const handlePositionUp = () =>
-    setImagePosition((p) => ({ ...p, y: Math.max(p.y - 5, -50) }));
-  const handlePositionDown = () =>
-    setImagePosition((p) => ({ ...p, y: Math.min(p.y + 5, 50) }));
-  const handlePositionLeft = () =>
-    setImagePosition((p) => ({ ...p, x: Math.max(p.x - 5, -50) }));
-  const handlePositionRight = () =>
-    setImagePosition((p) => ({ ...p, x: Math.min(p.x + 5, 50) }));
+  const handlePositionUp = () => setImagePosition((p) => ({ ...p, y: Math.max(p.y - 5, -50) }));
+  const handlePositionDown = () => setImagePosition((p) => ({ ...p, y: Math.min(p.y + 5, 50) }));
+  const handlePositionLeft = () => setImagePosition((p) => ({ ...p, x: Math.max(p.x - 5, -50) }));
+  const handlePositionRight = () => setImagePosition((p) => ({ ...p, x: Math.min(p.x + 5, 50) }));
 
   return (
-    <section className="relative min-h-screen px-4 pt-24 pb-16 sm:px-6 bg-[#075932]">
+    <section className="relative min-h-screen px-4 pt-20 pb-16 sm:px-6 bg-[#075932]">
       <div className="relative z-10 mx-auto max-w-6xl">
         {/* Back button */}
         <button
           onClick={onBack}
-          className="mb-8 flex items-center gap-2 font-mono text-sm font-bold uppercase tracking-widest text-[#FDFBF7] transition-colors hover:text-[#FFE600]"
+          className="mb-6 flex items-center gap-2 font-mono text-sm font-bold uppercase tracking-widest text-[#FDFBF7] transition-colors hover:text-[#FFE600]"
         >
           <ArrowLeft className="h-4 w-4" />
           Back
         </button>
 
-        <div className="grid gap-12 lg:grid-cols-[1fr,400px]">
+        <div className="grid gap-10 lg:grid-cols-[1fr,400px]">
           {/* LEFT: Form */}
-          <div className="animate-fade-in space-y-6">
+          <div className="animate-fade-in space-y-5">
             <div>
               <h2 className="font-serif text-4xl font-black text-[#FDFBF7] sm:text-5xl uppercase tracking-tighter">
                 Create your{' '}
@@ -85,8 +81,8 @@ export default function Generator({ onBack }: GeneratorProps) {
                   Poster
                 </span>
               </h2>
-              <p className="mt-2 font-mono text-sm text-[#FDFBF7]/80">
-                Fill in the details below to generate your custom pass.
+              <p className="mt-2 font-mono text-sm text-[#FDFBF7]/70">
+                Fill in your details below. Your poster updates live.
               </p>
             </div>
 
@@ -99,74 +95,22 @@ export default function Generator({ onBack }: GeneratorProps) {
                   ADJUST PHOTO
                 </label>
                 <div className="flex flex-wrap items-center gap-2">
-                  {/* Position controls */}
                   <div className="flex items-center gap-1 border-2 border-[#075932] bg-[#FDFBF7] p-1">
-                    <button
-                      onClick={handlePositionLeft}
-                      className="flex h-7 w-7 items-center justify-center font-bold text-[#075932] transition-colors hover:bg-[#FFE600]"
-                      aria-label="Move photo left"
-                      title="Move left"
-                    >
-                      ←
-                    </button>
-                    <button
-                      onClick={handlePositionUp}
-                      className="flex h-7 w-7 items-center justify-center font-bold text-[#075932] transition-colors hover:bg-[#FFE600]"
-                      aria-label="Move photo up"
-                      title="Move up"
-                    >
-                      ↑
-                    </button>
-                    <button
-                      onClick={handlePositionDown}
-                      className="flex h-7 w-7 items-center justify-center font-bold text-[#075932] transition-colors hover:bg-[#FFE600]"
-                      aria-label="Move photo down"
-                      title="Move down"
-                    >
-                      ↓
-                    </button>
-                    <button
-                      onClick={handlePositionRight}
-                      className="flex h-7 w-7 items-center justify-center font-bold text-[#075932] transition-colors hover:bg-[#FFE600]"
-                      aria-label="Move photo right"
-                      title="Move right"
-                    >
-                      →
-                    </button>
+                    <button onClick={handlePositionLeft} className="flex h-7 w-7 items-center justify-center font-bold text-[#075932] transition-colors hover:bg-[#FFE600]" aria-label="Move photo left" title="Move left">←</button>
+                    <button onClick={handlePositionUp} className="flex h-7 w-7 items-center justify-center font-bold text-[#075932] transition-colors hover:bg-[#FFE600]" aria-label="Move photo up" title="Move up">↑</button>
+                    <button onClick={handlePositionDown} className="flex h-7 w-7 items-center justify-center font-bold text-[#075932] transition-colors hover:bg-[#FFE600]" aria-label="Move photo down" title="Move down">↓</button>
+                    <button onClick={handlePositionRight} className="flex h-7 w-7 items-center justify-center font-bold text-[#075932] transition-colors hover:bg-[#FFE600]" aria-label="Move photo right" title="Move right">→</button>
                   </div>
-
-                  {/* Zoom controls */}
                   <div className="flex items-center gap-1 border-2 border-[#075932] bg-[#FDFBF7] p-1">
-                    <button
-                      onClick={handleZoomOut}
-                      disabled={imageZoom <= 1}
-                      className="flex h-7 w-7 items-center justify-center text-[#075932] transition-colors hover:bg-[#FFE600] disabled:opacity-30"
-                      aria-label="Zoom out"
-                      title="Zoom out"
-                    >
+                    <button onClick={handleZoomOut} disabled={imageZoom <= 1} className="flex h-7 w-7 items-center justify-center text-[#075932] transition-colors hover:bg-[#FFE600] disabled:opacity-30" aria-label="Zoom out" title="Zoom out">
                       <ZoomOut className="h-3.5 w-3.5" />
                     </button>
-                    <span className="min-w-[3rem] text-center font-mono text-xs font-bold text-[#075932]">
-                      {Math.round(imageZoom * 100)}%
-                    </span>
-                    <button
-                      onClick={handleZoomIn}
-                      disabled={imageZoom >= 2}
-                      className="flex h-7 w-7 items-center justify-center text-[#075932] transition-colors hover:bg-[#FFE600] disabled:opacity-30"
-                      aria-label="Zoom in"
-                      title="Zoom in"
-                    >
+                    <span className="min-w-[3rem] text-center font-mono text-xs font-bold text-[#075932]">{Math.round(imageZoom * 100)}%</span>
+                    <button onClick={handleZoomIn} disabled={imageZoom >= 2} className="flex h-7 w-7 items-center justify-center text-[#075932] transition-colors hover:bg-[#FFE600] disabled:opacity-30" aria-label="Zoom in" title="Zoom in">
                       <ZoomIn className="h-3.5 w-3.5" />
                     </button>
                   </div>
-
-                  {/* Reset */}
-                  <button
-                    onClick={handleResetPosition}
-                    className="flex h-9 items-center gap-1.5 border-2 border-[#075932] bg-[#FDFBF7] px-2.5 font-mono text-xs font-bold text-[#075932] transition-colors hover:bg-[#FFE600]"
-                    aria-label="Reset photo position"
-                    title="Reset position"
-                  >
+                  <button onClick={handleResetPosition} className="flex h-9 items-center gap-1.5 border-2 border-[#075932] bg-[#FDFBF7] px-2.5 font-mono text-xs font-bold text-[#075932] transition-colors hover:bg-[#FFE600]" aria-label="Reset photo position" title="Reset position">
                     <RotateCcw className="h-3 w-3" />
                     RESET
                   </button>
@@ -207,19 +151,18 @@ export default function Generator({ onBack }: GeneratorProps) {
 
           {/* RIGHT: Card Preview + Actions */}
           <div className="animate-fade-in animation-delay-200">
-            <div className="lg:sticky lg:top-24">
-              <div className="mb-4">
-                <h3 className="font-mono text-xs font-bold tracking-widest text-[#FDFBF7]/60">
+            <div className="lg:sticky lg:top-20">
+              <div className="mb-3">
+                <h3 className="font-mono text-xs font-bold tracking-widest text-[#FDFBF7]/50 uppercase">
                   LIVE PREVIEW
                 </h3>
               </div>
 
               {/* Card Container */}
               <div className="relative mx-auto max-w-[400px] aspect-square">
-                {/* Card */}
-                <div 
+                <div
                   ref={containerRef}
-                  className="relative overflow-hidden shadow-[12px_12px_0px_0px_rgba(5,59,33,1)] border-4 border-[#053b21] bg-[#0d7842] w-full h-full"
+                  className="relative overflow-hidden shadow-[8px_8px_0px_0px_rgba(5,59,33,1)] border-4 border-[#053b21] bg-[#075932] w-full h-full"
                 >
                   <div style={{ width: '1080px', height: '1080px', transform: `scale(${cardScale})`, transformOrigin: 'top left' }}>
                     <BuilderCard
@@ -237,7 +180,7 @@ export default function Generator({ onBack }: GeneratorProps) {
               </div>
 
               {/* Actions (desktop) */}
-              <div className="mt-6 hidden lg:block">
+              <div className="mt-5 hidden lg:block">
                 <CardActions
                   cardRef={cardRef}
                   name={name}
