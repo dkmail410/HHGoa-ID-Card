@@ -24,7 +24,7 @@ export async function exportCardAsPng(
 
     const link = document.createElement('a');
     const safeName = name.trim().replace(/\s+/g, '-') || 'Builder';
-    link.download = `HH-Goa-2026-${safeName}.png`;
+    link.download = `HH-Goa-2026-FrameInGoa-${safeName}.png`;
     link.href = blobUrl;
     
     // Append to body, click, and clean up

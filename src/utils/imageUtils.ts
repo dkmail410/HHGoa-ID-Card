@@ -1,3 +1,5 @@
+import heic2any from 'heic2any';
+
 export function validateImageFile(file: File): string | null {
   const validTypes = [
     'image/jpeg',
@@ -20,27 +22,24 @@ export function validateImageFile(file: File): string | null {
   return null;
 }
 
-export function createImageUrl(file: File): Promise<string> {
-  return new Promise((resolve, reject) => {
-    // For HEIC/HEIF, we'll attempt to load and fallback gracefully
-    if (file.name.match(/\.(heic|heif)$/i)) {
-      // Try loading the HEIC directly — modern browsers may support it
-      const url = URL.createObjectURL(file);
-      const img = new Image();
-      img.onload = () => resolve(url);
-      img.onerror = () => {
-        URL.revokeObjectURL(url);
-        reject(
-          new Error(
-            'HEIC format is not supported by your browser. Please convert to JPG or PNG.'
-          )
-        );
-      };
-      img.src = url;
-      return;
+export async function createImageUrl(file: File): Promise<string> {
+  // If it's a HEIC/HEIF image, convert it to JPEG using heic2any
+  if (file.type === 'image/heic' || file.type === 'image/heif' || file.name.match(/\.(heic|heif)$/i)) {
+    try {
+      const convertedBlob = await heic2any({
+        blob: file,
+        toType: 'image/jpeg',
+        quality: 0.8
+      });
+      // heic2any can return an array of blobs if it's an animation, handle both
+      const blob = Array.isArray(convertedBlob) ? convertedBlob[0] : convertedBlob;
+      return URL.createObjectURL(blob);
+    } catch (err) {
+      console.error('HEIC conversion failed:', err);
+      throw new Error('Failed to convert HEIC image. Please try a JPG or PNG instead.');
     }
+  }
 
-    const url = URL.createObjectURL(file);
-    resolve(url);
-  });
+  // For other formats, create object URL directly
+  return URL.createObjectURL(file);
 }

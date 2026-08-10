@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Download, Share2, Loader2, Check, RotateCcw } from 'lucide-react';
+import { Download, RotateCcw, Loader2, Check } from 'lucide-react';
 import { exportCardAsPng } from '../utils/exportCard';
 import { shareToX } from '../utils/shareToX';
 
@@ -39,7 +39,6 @@ export default function CardActions({
   };
 
   const handleShare = () => {
-    // If not downloaded yet, download first then share
     if (!downloadComplete) {
       handleDownload().then(() => {
         shareToX();
@@ -50,12 +49,12 @@ export default function CardActions({
   };
 
   return (
-    <div className="space-y-4">
-      {/* Success message */}
+    <div className="space-y-3">
+      {/* Ready indicator */}
       {isReady && (
-        <div className="animate-fade-in border-l-4 border-white bg-white/5 px-4 py-3">
-          <p className="text-sm font-medium text-white">
-            ID GENERATED
+        <div className="animate-fade-in bg-[#FFE600] px-4 py-2.5 border-2 border-[#075932] shadow-[4px_4px_0px_0px_rgba(7,89,50,1)]">
+          <p className="font-mono text-xs font-bold text-[#075932] uppercase tracking-widest">
+            ✦ POSTER READY — DOWNLOAD BELOW
           </p>
         </div>
       )}
@@ -64,22 +63,22 @@ export default function CardActions({
       <button
         onClick={handleDownload}
         disabled={isDownloading}
-        className="flex w-full items-center justify-center gap-3 rounded-xl bg-gradient-to-r from-orange-500 to-amber-500 px-5 py-4 font-bold text-white shadow-lg transition-all hover:scale-[1.02] active:scale-[0.98] disabled:opacity-70 disabled:cursor-not-allowed"
+        className="flex w-full items-center justify-center gap-3 bg-[#FFE600] px-5 py-4 font-mono text-sm font-bold uppercase tracking-widest text-[#075932] border-2 border-[#075932] shadow-[6px_6px_0px_0px_rgba(7,89,50,1)] transition-all hover:-translate-y-0.5 hover:shadow-[8px_8px_0px_0px_rgba(7,89,50,1)] active:translate-y-0.5 active:shadow-[2px_2px_0px_0px_rgba(7,89,50,1)] disabled:opacity-60 disabled:cursor-not-allowed"
       >
         {isDownloading ? (
           <>
-            <Loader2 className="h-5 w-5 animate-spin" />
-            PROCESSING...
+            <Loader2 className="h-4 w-4 animate-spin" />
+            GENERATING...
           </>
         ) : downloadComplete ? (
           <>
-            <Check className="h-5 w-5" />
-            DOWNLOADED
+            <Check className="h-4 w-4" />
+            DOWNLOADED ✓
           </>
         ) : (
           <>
-            <Download className="h-5 w-5" />
-            DOWNLOAD ID
+            <Download className="h-4 w-4" />
+            DOWNLOAD POSTER
           </>
         )}
       </button>
@@ -87,35 +86,36 @@ export default function CardActions({
       {/* Share on X */}
       <button
         onClick={handleShare}
-        className="flex w-full items-center justify-center gap-3 rounded-xl border border-white/10 bg-white/5 px-5 py-4 font-bold text-white transition-all hover:bg-white/10"
+        className="flex w-full items-center justify-center gap-3 bg-[#FF0080] px-5 py-3.5 font-mono text-sm font-bold uppercase tracking-widest text-[#FDFBF7] border-2 border-[#075932] shadow-[4px_4px_0px_0px_rgba(7,89,50,1)] transition-all hover:-translate-y-0.5 active:translate-y-0.5 active:shadow-[2px_2px_0px_0px_rgba(7,89,50,1)]"
       >
-        <Share2 className="h-5 w-5" />
         SHARE ON X
       </button>
 
       {/* Reset */}
       <button
         onClick={onReset}
-        className="flex w-full items-center justify-center gap-2 py-2 text-xs font-medium text-white/50 transition-colors hover:text-white"
+        className="flex w-full items-center justify-center gap-2 py-2 font-mono text-xs font-bold uppercase tracking-widest text-[#FDFBF7]/50 transition-colors hover:text-[#FFE600]"
       >
         <RotateCcw className="h-3 w-3" />
         START OVER
       </button>
 
       {/* Share instruction */}
-      <div className="rounded-xl border border-white/5 bg-white/5 p-3 text-center">
-        <p className="text-[10px] text-white/40 leading-relaxed">
-          Note: X (Twitter) does not allow auto-attaching images.
+      <div className="bg-[#FDFBF7] p-3 border-2 border-[#075932]">
+        <p className="font-mono text-[10px] font-bold text-[#075932]/70 leading-relaxed text-center uppercase tracking-wider">
+          X does not auto-attach images.
           <br />
-          Please manually attach the downloaded image to your post.
+          Attach the downloaded poster to your post manually.
         </p>
       </div>
 
       {/* Error */}
       {downloadError && (
-        <p className="border border-red-500/30 bg-red-500/10 p-3 text-center font-mono text-xs text-red-400 uppercase">
-          {downloadError}
-        </p>
+        <div className="bg-[#FF0080] p-3 border-2 border-[#075932]">
+          <p className="font-mono text-xs font-bold text-[#FDFBF7] uppercase text-center">
+            {downloadError}
+          </p>
+        </div>
       )}
     </div>
   );
